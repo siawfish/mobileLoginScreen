@@ -20,7 +20,7 @@ export default class ContactList extends Component {
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>Contacts</Text>
                 </View>
-                <ScrollView style={styles.listContainer} showsVerticalScrollIndicator>
+                <ScrollView style={styles.listContainer} showsVerticalScrollIndicator={false}>
                     <FlatList
                         data={contacts}
                         renderItem={({item})=>{
