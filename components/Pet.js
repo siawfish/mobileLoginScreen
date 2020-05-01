@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Image, Text } from 'react-native'
+import { Entypo } from '@expo/vector-icons';
+
 
 export default class Pet extends Component {
     
@@ -14,7 +16,7 @@ export default class Pet extends Component {
                     <Text style={styles.infoTitle}>{item.petname}</Text>
                     <Text style={styles.info}>{item.pettype}</Text>
                     <Text style={styles.info}>{item.petage}</Text>
-                    <Text style={styles.info}>{item.petloc}</Text>
+                    <Text style={styles.info}><Entypo name="location-pin" size={16} color="#ffcc33" /> {item.petloc}</Text>
                 </View>
             </View>
         )

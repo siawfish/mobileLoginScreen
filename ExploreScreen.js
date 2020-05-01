@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, StyleSheet, ScrollView, FlatList, View, TextInput } from 'react-native'
 import Pet from './components/Pet'
 
+
 export default class ExploreScreen extends Component {
     render() {
         const pets = [
