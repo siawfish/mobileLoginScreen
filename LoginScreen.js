@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity } from 
 
 
 export default class LoginScreen extends Component {
+    
     render() {
         return (
             <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -21,7 +22,7 @@ export default class LoginScreen extends Component {
 
                     <Text style={styles.forgotPass}>Forget password?</Text>
 
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity onPress={this.gotoLogin} style={styles.button}>
                     <Text style={styles.buttonText}>Log In</Text>
                     </TouchableOpacity>
                 </View>
