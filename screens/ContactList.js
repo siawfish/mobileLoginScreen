@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ScrollView, StyleSheet, FlatList, View, Text } from 'react-native'
-import Contact from './components/contact'
+import Contact from '../components/contact'
 
 export default class ContactList extends Component {
     render() {
