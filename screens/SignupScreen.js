@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     seconContainer: {
         backgroundColor:'#000',
         flex: 0.65,
-        marginTop:150,
+        marginTop:100,
         marginHorizontal:30,
         borderRadius:25,
         shadowColor: '#222422',
@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginHorizontal: 30,
         justifyContent: "center",
-        marginVertical: 10
+        marginVertical: 10,
+        marginBottom:20
     }
 })
