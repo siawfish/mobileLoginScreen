@@ -28,6 +28,7 @@ class Navigation extends Component {
                             fontWeight:'300'
                         }
                         }}
+                        headerRight={()=><Text>Logout</Text>}
                         name="Contacts" 
                         component={ContactList}
                     /> :
