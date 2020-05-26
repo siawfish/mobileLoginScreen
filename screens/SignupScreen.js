@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native'
+import { connect } from 'react-redux'
+import { signup, signupErr } from '../redux/actions/authActions'
 
-export default class SignupScreen extends Component {
+class SignupScreen extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -23,6 +25,26 @@ export default class SignupScreen extends Component {
         navigation.navigate('signin')
     }
 
+    signup = () => {
+        if(this.state.password!==this.state.conPassword){
+            this.props.signupErr("Sorry passwords do not match")
+            return false
+        }
+        if(this.state.username==""){
+            this.props.signupErr("Enter username")
+            return false  
+        }
+        if(this.state.email==""){
+            this.props.signupErr("Enter valid a email")
+            return false
+        }
+        if(this.state.password=="" || this.state.conPassword==""){
+            this.props.signupErr("Enter password")
+            return false
+        }
+        this.props.signup(this.state.email, this.state.password)
+    }
+
 
     render() {
         return (
@@ -34,6 +56,8 @@ export default class SignupScreen extends Component {
                         <Text style={styles.title}>Sign Up</Text>
                     </View>
 
+                    {this.props.authErr ? <Text style={styles.err}>{this.props.authErr}</Text> : null}
+
                     <View style={styles.formContainer}>
                         <View style={styles.inputContainer}>
                             <TextInput onChangeText={(text)=>{this.handleInputChange('username', text)}} value={this.state.username} style={styles.input} placeholder='Username' placeholderTextColor='#999' selectionColor="#ffcc33"/>
@@ -42,15 +66,15 @@ export default class SignupScreen extends Component {
                             <TextInput onChangeText={(text)=>{this.handleInputChange('email', text)}} value={this.state.email} style={styles.input} placeholder='Email' placeholderTextColor='#999' selectionColor="#ffcc33"/>
                         </View>
                         <View style={styles.inputContainer}>
-                            <TextInput onChangeText={(text)=>{this.handleInputChange('password', text)}} value={this.state.password} style={styles.input} placeholder='Password' placeholderTextColor='#999' selectionColor="#ffcc33"/>
+                            <TextInput secureTextEntry={true} onChangeText={(text)=>{this.handleInputChange('password', text)}} value={this.state.password} style={styles.input} placeholder='Password' placeholderTextColor='#999' selectionColor="#ffcc33"/>
                         </View>
                         <View style={styles.inputContainer}>
-                            <TextInput onChangeText={(text)=>{this.handleInputChange('conPassword', text)}} value={this.state.conPassword} style={styles.input} placeholder='Confirm Password' placeholderTextColor='#999' selectionColor="#ffcc33"/>
+                            <TextInput secureTextEntry={true} onChangeText={(text)=>{this.handleInputChange('conPassword', text)}} value={this.state.conPassword} style={styles.input} placeholder='Confirm Password' placeholderTextColor='#999' selectionColor="#ffcc33"/>
                         </View>
                     </View>
 
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity onPress={this.signup} style={styles.button}>
                             <Text style={styles.buttonText}>Submit</Text>
                         </TouchableOpacity>
                     </View>
@@ -145,5 +169,25 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         marginVertical: 10,
         marginBottom:20
+    },
+
+    err: {
+        color:'red',
+        paddingVertical:10,
+        marginLeft:30
     }
 })
+
+const mapDispatchToProps = {
+    signup,
+    signupErr
+}
+
+const mapStateToProps = (state) =>{
+    return {
+        authErr:state.err.register,
+        authStatus:state.status
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupScreen)
