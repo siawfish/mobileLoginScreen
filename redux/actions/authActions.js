@@ -38,6 +38,17 @@ export function signin(email, pass){
     }
 }
 
+export function logout(email, pass){
+    return async (dispatch)=>{
+        const user = await firebase
+        .auth()
+        .signOut()
+        dispatch({
+            type:"LoggedOut"
+        })
+    }
+}
+
 export function signupErr(err){
     return {
         type:"SignupErr",
